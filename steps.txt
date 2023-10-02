@@ -1,0 +1,32 @@
+1. create project folder
+2. create vurtual env (python -m venv "name of the environment without quotes"
+3. activate virtual environment (source env/scripts/activate) 
+	If unable to activate virtual environment from v code run these two commands
+	Get-ExecutionPolicy
+	Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force
+4. pip freeze to check the packages installed in virtual environment
+5. start the project (django-admin startproject mysite .)
+6. open the provect in visual studio code ( code .)
+7. add the new url to the urls.py (  path('', views.home),)
+8. in the views create a function to call the template/ the text 
+		(create a folder with name template and save all the .html files there) add the path of templates 
+		in setting.py in DIR under templates
+		from django.http import HttpResponse
+		from django.shortcuts import render
+		def home(response):
+    		return render (response, 'home.html')
+9. from bootstap.com copy and paste CDN to html page, just above the head closing tag
+10. Create a fiolder static and save static files ther 
+		STATIC_URL = 'static/'
+		STATTIC_ROOT = BASE_DIR /'static'
+		STATICFILES_DIRS = [
+    		'mysite/static'
+		]
+echo "# django-basics" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/NandagaweSandesh/django-basics.git
+git push -u origin main
+	
