@@ -32,4 +32,45 @@
 
 11. Crete app (python manage.py startapp employees)
 12. Migrate all the changes/ initial (python manage.py migrate)
+13. admin panel can be accessed by http://127.0.0.1:8000/admin/login/?next=/admin/
+14. create superuser for django admin (python manage.py createsupersuer)
+15. register the newly created app in mysite/settings.py in 'INSTALLED_APPS'	
+15. Crete some data for employees
+	1. crete a model in models.py in the creted app
+	2. create all the columns/ fields we need to use or records data related to employee
+	3. for example
+					class Employees(models.Model):
+    						first_name = models.CharField(max_length=100)
+							last_name = models.CharField(max_length=100)
+							photo = models.ImageField(upload_to='images')
+							designation = models.CharField(max_length=100)
+							email_address = models.EmailField(max_length=100, unique=True)
+							phone_number = models.CharField(max_length=12, blank=True)
+							created_at = models.DateTimeField(auto_now_add=True) #when the records is first created
+							updated_at = models.DateTimeField(auto_now=True) # to records when any changes made to this field  
+16. to register the new database creted to read models.py run two commands
+		 python manage.py makemigrations
+		 python manage.py migrate
+17. Still you can not see Employees table in admin panel as we need to register this in admin.py (admin.site.register(Employees))
+18. everything works bur we can not see the photo we loaded for employee; we need to configure for media
+	configure media:
+					1. create a folder 'media' in root level
+					2. in settings.py add below path (path of the folder created)
+						#media files configuration
+												MEDIA_URL = '/media/'
+												MEDIA_ROOT = BASE_DIR /'media'
+					3. IN urls.py in mysite add below code
+							from django.conf import settings
+							from django.conf.urls.static import static
+							
+							urlpatterns = [
+								path('admin/', admin.site.urls),
+								path('', views.home),
+							]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+19. in admin unsted of showing Employee1, to show by name add below function to employee class
+			    def __str__(self):
+        			return self.first_name + ' ' + self.last_name + ' / ' + self.designation
+
+
+
 	
